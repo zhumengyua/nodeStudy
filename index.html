@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+username: <input type="text" id="username" value="admin"><br>
+password: <input type="password" id="password" value=""><br>
+<button onclick="btnClick()">提交</button>
+<br>
+
+<form action="http://localhost:8000" method="post">
+    用户名：<input type="text" name="user">
+    密码：<input type="password" name="pass">
+    <textarea name="text" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="提交"></form>
+
+</body>
+</html>
+<script>
+
+    function btnClick() {
+        let username = document.getElementById('username').value
+        let password = document.getElementById('password').value
+        let xhr = new XMLHttpRequest();
+        xhr.open("get", "http://localhost:8888?username=" + username + '&password=' + password);
+        xhr.send();
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+            if (xhr.responseText === '登录成功') {
+                alert('登录成功')
+                window.location.href = 'http://baidu.com'
+            } else {
+                alert('失败,admin,123456')
+            }
+        }
+    }
+
+</script>
